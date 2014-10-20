@@ -13,23 +13,13 @@ app.get('/socket.io.js', function (req, res) {
 });
 
 io.on('connection', function(socket) {
-  console.log(     'a new connection');
-  // socket.on('disconnected', function(){
-  //   console.log('user is gone');
-  // });
+  console.log('a new connection');
+
   socket.on('sensor', function(data) {
     console.log(data);
   });
-});
 
-// io.on('sensor', function(data) {
-//   console.log('data:' + data);
-// });
-//
-// io.onmessage = function(event) {
-//   console.log(event);
-// }
-//
-// io.on('disconnected', function(){
-//   console.log('user is gone');
-// });
+  socket.on('disconnection', function(){
+    console.log('a disconnection');
+  });
+});

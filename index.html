@@ -2,7 +2,6 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!-- // <script type="text/javascript" src="/socket.io.js"></script> -->
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
   </head>
   <body>
@@ -13,9 +12,8 @@
     <div id='rot'>rotation:</div>
     <div id='ori'>orientation:</div>
 
-    <!-- WebSocket -->
     <script type='text/javascript'>
-
+      // websocket
       var ioSocket = io.connect();
       ioSocket.on('connection', function() {
         console.log('connection');
@@ -24,7 +22,7 @@
         var syn = document.getElementById('sync');
         syn.innerHTML = message;
       });
-      ioSocket.on('disconnected', function() {
+      ioSocket.on('disconnection', function() {
         console.log('disconnection');
       });
 
@@ -39,8 +37,7 @@
           pos.innerHTML = pos.innerHTML + " lat: "+ lat + " long: " + lon;
       });
 
-      //
-
+      // acceleration
       window.ondevicemotion = function(event) {
         ax = event.accelerationIncludingGravity.x;
         ay = event.accelerationIncludingGravity.y;
@@ -55,14 +52,8 @@
         var rot = document.getElementById('rot');
         acc.innerHTML = acc.innerHTML + " ax: " + ax + " ay: " + ay + " az: " + az;
         rot.innerHTMl = rot.innerHTML + " alpha: " + arAlpha + " beta: " + arBeta + " gamma: " + arGamma;
-          // ioSocket.send(JSON.stringify({type: 'sensor',
-          //                               message: 'ax: ' + ax + ' ay: ' + ay + ' az: ' + az
-          //                               }));
         ioSocket.emit('sensor', {type: 'sensor',
                                  message: 'ax: ' + ax + ' ay: ' + ay + ' az: ' + az});
-          // ioSocket.send(JSON.stringify({type: 'sensor',
-          //                               message: ' alpha: ' + arAlpha + ' beta: ' + arBeta + ' gamma: ' + arGamma
-          //                               }));
         ioSocket.emit('sensor', {type: 'sensor',
                                  message: ' alpha: ' + arAlpha + ' beta: ' + arBeta + ' gamma: ' + arGamma});
       };
@@ -72,10 +63,6 @@
         gamma = Math.round(event.gamma);
         var ori = document.getElementById('ori');
         ori.innerHTML = ori.innerHTML + " alpha: " + alpha + " beta: " + beta + " gamma: " + gamma;
-          // ioSocket.send(JSON.stringify({type: 'sensor',
-          //                               type: 'sensor',
-          //                               message: ' alpha: ' + arAlpha + ' beta: ' + arBeta + ' gamma: ' + arGamma
-          //                               }));
         ioSocket.emit('sensor', {type: 'sensor',
                                  message: ' alpha: ' + arAlpha + ' beta: ' + arBeta + ' gamma: ' + arGamma});
       };
@@ -83,21 +70,12 @@
 
     <!-- Ambient light (Firefox 22.0 Mac only)
     <script type='text/javascript'>
-
       window.addEventListener('devicelight', function(event) {
         // Get the ambient light level in lux.
         var lightLevel = event.value;
         var lig = document.getElementById('light');
         lig.innerHTML = lig.innerHTML + " light: " + lightLevel;
       });
-
     </script>-->
-
-    <!-- -->
-    <script>
-
-
-
-    </script>
   </body>
 </html>
