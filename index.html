@@ -35,6 +35,8 @@
           // Do something interesting...
           var pos = document.getElementById('latlong');
           pos.innerHTML = pos.innerHTML + " lat: "+ lat + " long: " + lon;
+          ioSocket.emit('location', {type: 'location',
+                                     message: ' lat: '+ lat + ' long: ' + lon});
       });
 
       // acceleration
