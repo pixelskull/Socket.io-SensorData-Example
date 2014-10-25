@@ -86,10 +86,15 @@
 
       // hammerjs swipe example
       var hammerelement = document.getElementById('hammerdiv');
-      Hammer(hammerelement).on('swipe', function (ev) {
-          hammerelement.textContent += ev.type + " ";
-          ioSocket.emit('hammerevent', {type: 'hammerevent',
-                                        message: 'Hammerevent: '+ ev});
+      Hammer(hammerelement).on('swipe', function(ev) {
+        hammerelement.textContent += ev.type + " ";
+        ioSocket.emit('hammerevent', {type: 'hammerevent',
+                                      message: 'Hammerevent: '+ ev});
+      });
+      Hammer(hammerelement).on('swipeleft', function(ev) {
+        hammerelement.textContent += ev.type + " ";
+        ioSocket.emit('hammerevent', {type: 'hammerevent',
+                                      message: 'Hammerevent: '+ ev+ 'leftswipe'});
       });
 
 
