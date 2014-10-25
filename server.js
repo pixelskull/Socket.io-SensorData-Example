@@ -12,6 +12,10 @@ app.get('/socket.io.js', function (req, res) {
   res.sendFile(__dirname + '/socket.io.js');
 });
 
+app.get('/hammer.min.js', function (req, res) {
+  res.sendFile(__dirname + '/hammer.min.js');
+});
+
 io.on('connection', function(socket) {
   console.log('a new connection');
 
@@ -26,7 +30,7 @@ io.on('connection', function(socket) {
   });
 
   socket.on('disconnection', function(){
-    // do something with disconnedtioninformation 
+    // do something with disconnedtioninformation
     console.log('a disconnection');
   });
 });
