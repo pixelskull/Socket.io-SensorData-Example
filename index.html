@@ -84,16 +84,15 @@
                                        message: 'batterylevel not available'});
       }
 
-      // hammerjs examples
+      // hammerjs swipe example
       var hammerelement = document.getElementById('hammerdiv');
-      // var hammertime = Hammer.Manager(hammerelement);
-
-      // var swipe = new Hammer.Swipe();
-      // hammertime.add(swipe);
-
       Hammer(hammerelement).on('swipe', function (ev) {
           hammerelement.textContent += ev.type + " ";
+          ioSocket.emit('hammerevent', {type: 'hammerevent',
+                                        message: 'Hammerevent: '+ ev});
       });
+
+
     </script>
 
     <!-- Ambient light (Firefox 22.0 Mac only)

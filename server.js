@@ -29,6 +29,16 @@ io.on('connection', function(socket) {
     console.log(data);
   });
 
+  socket.on('batterylevel', function(data) {
+    // do something with batterielevelinformation
+    console.log(data);
+  });
+
+  socket.on('hammerevent', function(data) {
+    // do something with Hammerevent
+    console.log(data);
+  });
+
   socket.on('disconnection', function(){
     // do something with disconnedtioninformation
     console.log('a disconnection');
