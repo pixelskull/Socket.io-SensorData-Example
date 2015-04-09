@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type='text/javascript' src='/socket.io.js'></script>
+    <script type='text/javascript' src='/hammer.min.js'></script>
+
+    <script type='text/javascript' src='/client-hammer.js'></script>
+    <script type='text/javascript' src='/client-location.js'></script>
+    <script type='text/javascript' src='/client-sensor.js'></script>
+
+  </head>
+  <body>
+    <div id='sync'>sync:</div>
+    <div id='latlong'>pos:</div>
+    <div id='light'>light:</div>
+    <div id='acc'>acceleration:</div>
+    <div id='rot'>rotation:</div>
+    <div id='ori'>orientation:</div>
+
+    <div id='hammerdiv' style="background:gray; width: 400px; height: 400px"> </div>
+
+    <script type='text/javascript'>
+      // websocket
+      var ioSocket = io.connect();
+      ioSocket.on('connection', function() {
+        console.log('connection');
+      });
+      ioSocket.on('serversync', function(message) {
+        var syn = document.getElementById('sync');
+        syn.innerHTML = message;
+      });
+      ioSocket.on('disconnection', function() {
+        console.log('disconnection');
+      });
+    </script>
+
+    <!-- Ambient light (Firefox 22.0 Mac only)
+    <script type='text/javascript'>
+      window.addEventListener('devicelight', function(event) {
+        // Get the ambient light level in lux.
+        var lightLevel = event.value;
+        var lig = document.getElementById('light');
+        lig.innerHTML = lig.innerHTML + " light: " + lightLevel;
+      });
+    </script>-->
+  </body>
+</html>
